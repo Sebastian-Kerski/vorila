@@ -13,9 +13,22 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-      background: systemBackground;
-      color: label;
+      background: #ffffff;
+      color: #000000;
       line-height: 1.5;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #000000;
+        color: #ffffff;
+      }
+
+      .app-content p,
+      .hero p,
+      footer {
+        color: #888888;
+      }
     }
 
     .container {
@@ -38,14 +51,14 @@
 
     .hero p {
       font-size: 18px;
-      color: gray;
+      color: #666666;
       margin-bottom: 40px;
     }
 
     .apps {
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 32px;
     }
 
     .app-card {
@@ -68,7 +81,7 @@
 
     .app-content p {
       margin: 4px 0 8px 0;
-      color: gray;
+      color: #666666;
       font-size: 15px;
     }
 
@@ -82,7 +95,7 @@
     footer {
       margin-top: 60px;
       font-size: 14px;
-      color: gray;
+      color: #666666;
       display: flex;
       gap: 16px;
     }
@@ -113,7 +126,7 @@
 
       <!-- VorilaPrep -->
       <div class="app-card">
-        <img src="assets/icons/vorila-prep.png" alt="VorilaPrep icon" class="app-icon">
+        <img src="vorila-prep.png" alt="VorilaPrep icon" class="app-icon">
         <div class="app-content">
           <h3>VorilaPrep</h3>
           <p>Prepare your state before performance.</p>
@@ -125,7 +138,7 @@
 
       <!-- VorilaLog -->
       <div class="app-card">
-        <img src="assets/icons/vorila-log.png" alt="VorilaLog icon" class="app-icon">
+        <img src="vorila-log.png" alt="VorilaLog icon" class="app-icon">
         <div class="app-content">
           <h3>VorilaLog</h3>
           <p>Capture activity when tracking isn’t possible.</p>
