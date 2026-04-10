@@ -4,31 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vorila</title>
-
   <style>
-    :root {
-      color-scheme: light dark;
-    }
-
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
       background: #ffffff;
       color: #000000;
       line-height: 1.5;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: #000000;
-        color: #ffffff;
-      }
-
-      .hero p,
-      .app-content p,
-      footer {
-        color: #888888;
-      }
     }
 
     .container {
@@ -43,28 +25,23 @@
       margin-bottom: 60px;
     }
 
-    .hero h1 {
+    h1 {
       font-size: 34px;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin: 0 0 12px 0;
     }
 
-    .hero p {
+    .intro {
       font-size: 18px;
       color: #666666;
       margin-bottom: 40px;
-    }
-
-    .apps {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
     }
 
     .app-card {
       display: flex;
       gap: 16px;
       align-items: center;
+      margin-bottom: 28px;
     }
 
     .app-icon {
@@ -75,88 +52,69 @@
       flex-shrink: 0;
     }
 
-    .app-content h3 {
-      margin: 0;
+    .app-title {
+      margin: 0 0 4px 0;
       font-size: 18px;
+      font-weight: 600;
     }
 
-    .app-content p {
-      margin: 4px 0 8px 0;
+    .app-text {
+      margin: 0 0 8px 0;
+      font-size: 15px;
       color: #666666;
-      font-size: 15px;
     }
 
-    .app-content a {
-      font-size: 15px;
-      text-decoration: none;
+    a {
       color: #007aff;
-      font-weight: 500;
+      text-decoration: none;
     }
 
     footer {
       margin-top: 60px;
       font-size: 14px;
       color: #666666;
-      display: flex;
-      gap: 16px;
     }
 
     footer a {
-      text-decoration: none;
-      color: inherit;
+      margin-right: 16px;
+      color: #666666;
     }
   </style>
 </head>
-
 <body>
   <div class="container">
+    <header>Vorila</header>
 
-    <header>
-      Vorila
-    </header>
+    <h1>Find your zone.<br>Not by chance. By design.</h1>
 
-    <section class="hero">
-      <h1>Find your zone.<br>Not by chance. By design.</h1>
-      <p>
-        Vorila helps you regulate your state before performance
-        and capture what matters afterwards.
-      </p>
-    </section>
+    <p class="intro">
+      Vorila helps you regulate your state before performance
+      and capture what matters afterwards.
+    </p>
 
-    <section class="apps">
-
-      <!-- VorilaPrep -->
-      <div class="app-card">
-        <img src="/vorila/vorila-prep.png" alt="VorilaPrep icon" class="app-icon">
-        <div class="app-content">
-          <h3>VorilaPrep</h3>
-          <p>Prepare your state before performance.</p>
-          <a href="https://apps.apple.com/de/app/vorila-prep/id6760753050">
-            View on App Store →
-          </a>
-        </div>
+    <div class="app-card">
+      <img src="https://sebastian-kerski.github.io/vorila/vorila-prep.png" alt="VorilaPrep icon" class="app-icon">
+      <div>
+        <p class="app-title">VorilaPrep</p>
+        <p class="app-text">Prepare your state before performance.</p>
+        <a href="https://apps.apple.com/de/app/vorila-prep/id6760753050">View on App Store</a>
       </div>
+    </div>
 
-      <!-- VorilaLog -->
-      <div class="app-card">
-        <img src="/vorila/vorila-log.png" alt="VorilaLog icon" class="app-icon">
-        <div class="app-content">
-          <h3>VorilaLog</h3>
-          <p>Capture activity when tracking isn’t possible.</p>
-          <a href="https://apps.apple.com/de/app/vorilalog/id6758885506">
-            View on App Store →
-          </a>
-        </div>
+    <div class="app-card">
+      <img src="https://sebastian-kerski.github.io/vorila/vorila-log.png" alt="VorilaLog icon" class="app-icon">
+      <div>
+        <p class="app-title">VorilaLog</p>
+        <p class="app-text">Capture activity when tracking isn't possible.</p>
+        <a href="https://apps.apple.com/de/app/vorilalog/id6758885506">View on App Store</a>
       </div>
-
-    </section>
+    </div>
 
     <footer>
       <a href="https://sebastian-kerski.github.io/vorila/">Home</a>
       <a href="https://sebastian-kerski.github.io/vorila/support.html">Support</a>
       <a href="https://sebastian-kerski.github.io/vorila/privacy.html">Privacy</a>
     </footer>
-
   </div>
 </body>
 </html>
