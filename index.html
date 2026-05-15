@@ -3,153 +3,524 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vorila</title>
-
+  <title>Vorila – Calm adaptive performance intelligence</title>
+  <meta name="description" content="Three apps. One ecosystem. Regulate. Measure. Understand.">
   <style>
-    body {
+    :root {
+      --color-bg: #ffffff;
+      --color-surface: #f5f5f7;
+      --color-text: #1d1d1f;
+      --color-text-secondary: #6e6e73;
+      --color-text-tertiary: #a1a1a6;
+      --color-border: rgba(0, 0, 0, 0.08);
+      --color-link: #0071e3;
+
+      --radius-card: 20px;
+      --radius-badge: 6px;
+      --radius-icon: 18px;
+
+      --shadow-card: 0 2px 20px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.04);
+      --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.11), 0 2px 8px rgba(0, 0, 0, 0.06);
+
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Arial, sans-serif;
-      background: #ffffff;
-      color: #000000;
+      padding: 0;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--color-bg);
+      color: var(--color-text);
       line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 64px 24px;
+    /* ── Nav ── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
     }
 
-    header {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 80px;
-    }
-
-    h1 {
-      font-size: 42px;
-      font-weight: 700;
-      margin: 0 0 16px 0;
-      letter-spacing: -0.5px;
-    }
-
-    .sub {
-      font-size: 18px;
-      color: #666666;
-      margin-bottom: 64px;
-      max-width: 560px;
-    }
-
-    .apps {
+    .nav {
       display: flex;
-      flex-direction: column;
-      gap: 40px;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 48px;
+    }
+
+    .nav-brand {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-text);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 96px 24px 72px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .hero-tagline {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      margin-bottom: 28px;
+    }
+
+    .hero-headline {
+      font-size: 44px;
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .hero-sub {
+      font-size: 21px;
+      color: var(--color-text-secondary);
+      font-weight: 400;
+      letter-spacing: -0.2px;
+    }
+
+    /* ── App Cards ── */
+    .apps-section {
+      padding: 16px 24px 88px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
     }
 
     .app-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-card);
       display: flex;
-      gap: 20px;
-      align-items: center;
+      flex-direction: column;
+      gap: 14px;
+      transition: box-shadow 0.22s, transform 0.22s;
+    }
+
+    .app-card:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-3px);
+    }
+
+    .app-card--prep {
+      background: linear-gradient(155deg, #fff7f3 0%, #ffffff 55%);
+    }
+
+    .app-card--log {
+      background: linear-gradient(155deg, #f3f7ff 0%, #ffffff 55%);
+    }
+
+    .app-card--rethink {
+      background: linear-gradient(155deg, #f6f3ff 0%, #ffffff 55%);
+    }
+
+    .app-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
     }
 
     .app-icon {
-      width: 80px;
-      height: 80px;
-      border-radius: 20px;
-      object-fit: cover;
+      width: 68px;
+      height: 68px;
+      border-radius: var(--radius-icon);
       flex-shrink: 0;
+      object-fit: cover;
     }
 
-    .app-title {
+    .app-badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 11px;
+      border-radius: var(--radius-badge);
+      white-space: nowrap;
+      margin-top: 4px;
+    }
+
+    .badge-prep {
+      background: #ffece3;
+      color: #b83a10;
+    }
+
+    .badge-log {
+      background: #e3eeff;
+      color: #1550a8;
+    }
+
+    .badge-rethink {
+      background: #ede3ff;
+      color: #5a1a8a;
+    }
+
+    .app-name {
       font-size: 20px;
       font-weight: 600;
-      margin: 0 0 6px 0;
+      letter-spacing: -0.4px;
+      color: var(--color-text);
     }
 
-    .app-text {
+    .app-desc {
       font-size: 15px;
-      color: #666666;
-      margin: 0 0 10px 0;
+      color: var(--color-text-secondary);
+      line-height: 1.65;
+      flex: 1;
     }
 
-    .app-link {
-      font-size: 15px;
-      color: #007aff;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    footer {
-      margin-top: 80px;
+    .app-store-btn {
+      display: inline-flex;
+      align-items: center;
       font-size: 14px;
-      color: #888888;
-    }
-
-    footer a {
-      margin-right: 16px;
-      color: inherit;
+      font-weight: 500;
+      color: var(--color-link);
       text-decoration: none;
+      padding-top: 14px;
+      border-top: 1px solid var(--color-border);
+      margin-top: auto;
+      transition: opacity 0.15s;
     }
 
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: #000000;
-        color: #ffffff;
+    .app-store-btn:hover {
+      opacity: 0.7;
+    }
+
+    .app-store-btn--unavailable {
+      color: var(--color-text-tertiary);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* ── Ecosystem ── */
+    .ecosystem {
+      background: #15152a;
+      color: #f0f0f8;
+      text-align: center;
+      padding: 88px 24px;
+    }
+
+    .ecosystem-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .ecosystem-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.38);
+      margin-bottom: 22px;
+    }
+
+    .ecosystem-text {
+      font-size: 23px;
+      font-weight: 500;
+      line-height: 1.55;
+      letter-spacing: -0.3px;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .ecosystem-loop {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .loop-item {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .loop-sep {
+      color: rgba(255, 255, 255, 0.18);
+      font-size: 16px;
+      font-weight: 300;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      border-top: 1px solid var(--color-border);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 48px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--color-text-tertiary);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 22px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--color-text-tertiary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-text);
+    }
+
+    /* ── Responsive – tablet ── */
+    @media (max-width: 960px) {
+      .nav {
+        padding: 16px 28px;
       }
 
-      .sub,
-      .app-text,
-      footer {
-        color: #888888;
+      .apps-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .footer-inner {
+        padding: 24px 28px;
+      }
+    }
+
+    /* ── Responsive – mobile ── */
+    @media (max-width: 600px) {
+      .nav {
+        padding: 14px 20px;
+      }
+
+      .nav-links {
+        gap: 20px;
+      }
+
+      .hero {
+        padding: 60px 20px 48px;
+      }
+
+      .hero-headline {
+        font-size: 30px;
+        letter-spacing: -0.8px;
+      }
+
+      .hero-sub {
+        font-size: 17px;
+      }
+
+      .apps-section {
+        padding: 12px 16px 64px;
+      }
+
+      .app-card {
+        padding: 24px 22px;
+      }
+
+      .footer-inner {
+        padding: 22px 20px;
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
 
-    <header>Vorila</header>
+  <header class="site-header">
+    <nav class="nav" aria-label="Site navigation">
+      <a href="index.html" class="nav-brand">Vorila</a>
+      <ul class="nav-links">
+        <li><a href="support.html">Support</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <h1>
-      Small apps that help.
-    </h1>
+  <main>
 
-    <p class="sub">
-      For preparation, tracking, and the moments around performance.
-    </p>
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-headline">
+      <p class="hero-tagline">Calm adaptive performance intelligence</p>
+      <h1 class="hero-headline" id="hero-headline">Three apps. One ecosystem.</h1>
+      <p class="hero-sub">Regulate. Measure. Understand.</p>
+    </section>
 
-    <div class="apps">
+    <!-- App Cards -->
+    <section class="apps-section" aria-label="Apps">
+      <div class="apps-grid">
 
-      <div class="app-card">
-        <img src="https://sebastian-kerski.github.io/vorila/vorila-prep.png" alt="VorilaPrep" class="app-icon">
-        <div>
-          <p class="app-title">VorilaPrep</p>
-          <p class="app-text">Prepare your state before performance.</p>
-          <a class="app-link" href="https://apps.apple.com/de/app/vorila-prep/id6760753050">
-            View on App Store →
+        <!-- VorilaPrep -->
+        <article class="app-card app-card--prep">
+          <div class="app-card-top">
+            <img
+              src="assets/images/vorila-prep-icon.png"
+              alt="VorilaPrep app icon"
+              class="app-icon"
+              width="68"
+              height="68"
+            >
+            <span class="app-badge badge-prep">Regulate</span>
+          </div>
+          <h2 class="app-name">VorilaPrep</h2>
+          <p class="app-desc">
+            Helps athletes get into the right activation state before performance.
+            Designed for the final minutes before training, competition, or important sessions.
+          </p>
+          <a
+            class="app-store-btn"
+            href="https://apps.apple.com/de/app/vorila-prep/id6760753050"
+            aria-label="Download VorilaPrep on the App Store"
+          >
+            Download on the App Store&thinsp;→
           </a>
+        </article>
+
+        <!-- VorilaLog -->
+        <article class="app-card app-card--log">
+          <div class="app-card-top">
+            <img
+              src="assets/images/vorila-log-icon.png"
+              alt="VorilaLog app icon"
+              class="app-icon"
+              width="68"
+              height="68"
+            >
+            <span class="app-badge badge-log">Measure</span>
+          </div>
+          <h2 class="app-name">VorilaLog</h2>
+          <p class="app-desc">
+            Fast training and competition logging. Helps athletes document sessions,
+            capture patterns, and connect training data with Apple Health where available.
+          </p>
+          <a
+            class="app-store-btn"
+            href="https://apps.apple.com/de/app/vorilalog/id6758885506"
+            aria-label="Download VorilaLog on the App Store"
+          >
+            Download on the App Store&thinsp;→
+          </a>
+        </article>
+
+        <!-- VorilaRethink -->
+        <article class="app-card app-card--rethink">
+          <div class="app-card-top">
+            <img
+              src="assets/images/vorila-rethink-icon.png"
+              alt="VorilaRethink app icon"
+              class="app-icon"
+              width="68"
+              height="68"
+            >
+            <span class="app-badge badge-rethink">Understand</span>
+          </div>
+          <h2 class="app-name">VorilaRethink</h2>
+          <p class="app-desc">
+            Competition reflection and performance intelligence. Helps athletes analyze
+            patterns, learn from mistakes, and make smarter decisions for the next performance.
+          </p>
+          <!-- TODO: Insert VorilaRethink App Store link when available -->
+          <span class="app-store-btn app-store-btn--unavailable" aria-label="App Store link coming soon">
+            Coming to App Store soon
+          </span>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Ecosystem -->
+    <section class="ecosystem" aria-label="Ecosystem">
+      <div class="ecosystem-inner">
+        <p class="ecosystem-eyebrow">The Vorila Ecosystem</p>
+        <p class="ecosystem-text">
+          Vorila connects regulation, measurement, and reflection
+          in one performance loop.
+        </p>
+        <div class="ecosystem-loop" aria-hidden="true">
+          <span class="loop-item">Regulate</span>
+          <span class="loop-sep">→</span>
+          <span class="loop-item">Measure</span>
+          <span class="loop-sep">→</span>
+          <span class="loop-item">Understand</span>
+          <span class="loop-sep">→</span>
+          <span class="loop-item">Regulate</span>
         </div>
       </div>
+    </section>
 
-      <div class="app-card">
-        <img src="https://sebastian-kerski.github.io/vorila/vorila-log.png" alt="VorilaLog" class="app-icon">
-        <div>
-          <p class="app-title">VorilaLog</p>
-          <p class="app-text">Capture activity when tracking isn’t possible.</p>
-          <a class="app-link" href="https://apps.apple.com/de/app/vorilalog/id6758885506">
-            View on App Store →
-          </a>
-        </div>
-      </div>
+  </main>
 
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-copy">© 2025 Sebastian Kerski</p>
+      <ul class="footer-links">
+        <li><a href="support.html">Support</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+      </ul>
     </div>
+  </footer>
 
-    <footer>
-      <a href="https://sebastian-kerski.github.io/vorila/support.html">Support</a>
-      <a href="https://sebastian-kerski.github.io/vorila/privacy.html">Privacy</a>
-    </footer>
-
-  </div>
 </body>
 </html>
